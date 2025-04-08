@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>화학 실험 시뮬레이션</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+    }
+    h1 {
+      color: #2a4d69;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #006400;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔬 화학 실험 시뮬레이션</h1>
+  <p>용액 A와 B를 선택하여 반응을 시뮬레이션해보세요.</p>
+
+  <label for="solutionA">용액 A:</label>
+  <select id="solutionA">
+    <option value="HCl">염산 (HCl)</option>
+    <option value="NaOH">수산화나트륨 (NaOH)</option>
+    <option value="AgNO3">질산은 (AgNO₃)</option>
+    <option value="CuSO4">황산구리 (CuSO₄)</option>
+  </select>
+
+  <label for="solutionB">용액 B:</label>
+  <select id="solutionB">
+    <option value="NaOH">수산화나트륨 (NaOH)</option>
+    <option value="HCl">염산 (HCl)</option>
+    <option value="NaCl">염화나트륨 (NaCl)</option>
+    <option value="BaCl2">염화바륨 (BaCl₂)</option>
+    <option value="H2SO4">황산 (H₂SO₄)</option>
+    <option value="AgNO3">질산은 (AgNO₃)</option>
+  </select>
+
+  <button onclick="simulateReaction()">실험 시작</button>
+
+  <div id="result"></div>
+
+  <script>
+    function simulateReaction() {
+      const a = document.getElementById("solutionA").value;
+      const b = document.getElementById("solutionB").value;
+      const resultDiv = document.getElementById("result");
+
+      let result;
+
+      // 중화 반응
+      if ((a === "HCl" && b === "NaOH") || (a === "NaOH" && b === "HCl")) {
+        result = "중화 반응 발생 → 물(H₂O) + 염(NaCl)";
+      
+      // AgNO₃ + NaCl → AgCl 앙금
+      } else if ((a === "AgNO3" && b === "NaCl") || (a === "NaCl" && b === "AgNO3")) {
+        result = "앙금 생성 → 흰색 앙금 (AgCl)";
+      
+      // BaCl₂ + H₂SO₄ → BaSO₄ 앙금
+      } else if ((a === "BaCl2" && b === "H2SO4") || (a === "H2SO4" && b === "BaCl2")) {
+        result = "앙금 생성 → 흰색 앙금 (BaSO₄)";
+      
+      // CuSO₄ + NaOH → Cu(OH)₂ 앙금
+      } else if ((a === "CuSO4" && b === "NaOH") || (a === "NaOH" && b === "CuSO4")) {
+        result = "앙금 생성 → 청색 앙금 (Cu(OH)₂)";
+      
+      // 반응 없음 (예: HCl + NaCl)
+      } else {
+        result = "뚜렷한 화학 반응 없음.";
+      }
+
+      resultDiv.textContent = `결과: ${result}`;
+    }
+  </script>
+</body>
+</html>
